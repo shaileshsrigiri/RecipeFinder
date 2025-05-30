@@ -9,7 +9,10 @@ This SwiftUI-based recipe app lets users browse a curated list of global recipes
 
 ## 📸 Screenshots
 
-
+<img width="422" alt="Screenshot 2025-05-30 at 3 29 35 PM" src="https://github.com/user-attachments/assets/b85179ad-c605-486a-81d0-f67c5f742558" />
+<img width="422" alt="Screenshot 2025-05-30 at 3 30 01 PM" src="https://github.com/user-attachments/assets/ec39f451-a96f-451f-a65d-78de5e55c340" />
+<img width="422" alt="Screenshot 2025-05-30 at 3 30 53 PM" src="https://github.com/user-attachments/assets/2f5f378a-ec50-4494-a908-9a39fd3a667c" />
+<img width="422" alt="Screenshot 2025-05-30 at 3 34 44 PM" src="https://github.com/user-attachments/assets/55ea0690-8379-4473-84e6-d631973ce70a" />
 
 
 ---
@@ -132,20 +135,6 @@ Tests are written with `XCTest`, no UI or integration tests required.
 ## 📬 Feedback
 
 If you have any suggestions or want to collaborate, feel free to open an issue or PR! 🙌
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
