@@ -16,11 +16,7 @@ final class ImageCacheManagerTests: XCTestCase {
 
     override func setUpWithError() throws {
         cacheManager = ImageCacheManager.shared
-
-        // Use a mock URL for testing
         imageURL = URL(string: "https://example.com/test-image.jpg")
-
-        // Clean up any previously cached version
         let fileURL = cacheManager.cacheDirectoryInternal.appendingPathComponent(imageURL.lastPathComponent)
         if FileManager.default.fileExists(atPath: fileURL.path) {
             try FileManager.default.removeItem(at: fileURL)
@@ -37,7 +33,6 @@ final class ImageCacheManagerTests: XCTestCase {
         let cacheManager = ImageCacheManager.shared
         let mockURL = URL(string: "https://example.com/test_image.jpg")!
         
-        // ✅ Use the same hashing logic as ImageCacheManager
         let hashedFileName = "\(mockURL.absoluteString.hashValue).jpg"
         let fileURL = cacheManager.test_cacheDirectory.appendingPathComponent(hashedFileName)
 
@@ -53,7 +48,7 @@ final class ImageCacheManagerTests: XCTestCase {
     func testInvalidURL_shouldReturnNil() async {
         let invalidURL = URL(string: "https://example.com/does-not-exist.jpg")!
         let image = await cacheManager.loadImage(from: invalidURL)
-        XCTAssertNil(image) // Since it's not pre-downloaded and we can't mock URLSession here
+        XCTAssertNil(image)
     }
 
 }
