@@ -36,16 +36,18 @@ final class ImageCacheManagerTests: XCTestCase {
 
         let cacheManager = ImageCacheManager.shared
         let mockURL = URL(string: "https://example.com/test_image.jpg")!
-        let fileURL = cacheManager.test_cacheDirectory.appendingPathComponent(mockURL.lastPathComponent)
+        
+        // ✅ Use the same hashing logic as ImageCacheManager
+        let hashedFileName = "\(mockURL.absoluteString.hashValue).jpg"
+        let fileURL = cacheManager.test_cacheDirectory.appendingPathComponent(hashedFileName)
 
-        // Write image to cache manually
         try imageData.write(to: fileURL)
         XCTAssertTrue(FileManager.default.fileExists(atPath: fileURL.path), "❌ Image file not found on disk")
 
-        // Load via ImageCacheManager
         let loadedImage = await cacheManager.loadImage(from: mockURL)
         XCTAssertNotNil(loadedImage, "❌ Image failed to load from cache")
     }
+
 
 
     func testInvalidURL_shouldReturnNil() async {

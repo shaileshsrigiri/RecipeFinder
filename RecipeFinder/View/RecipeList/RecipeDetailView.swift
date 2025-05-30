@@ -48,3 +48,19 @@ struct RecipeDetailView: View {
 }
 
 
+#Preview {
+    Group {
+        if let mockResponse = try? JSONDecoder().decode(RecipeResponse.self, from: MockJSON.valid),
+           let mockRecipe = mockResponse.recipes.first {
+            NavigationView {
+                RecipeDetailView(recipe: mockRecipe)
+            }
+        } else {
+            Text("Failed to load mock recipe")
+        }
+    }
+}
+
+
+
+

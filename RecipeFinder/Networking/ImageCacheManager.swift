@@ -7,19 +7,24 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
-class ImageCacheManager {
+final class ImageCacheManager {
     static let shared = ImageCacheManager()
     private let fileManager = FileManager.default
     let cacheDirectoryInternal: URL
 
     private init() {
-        cacheDirectoryInternal = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent("ImageCache")
+        cacheDirectoryInternal = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("ImageCache")
+
         try? fileManager.createDirectory(at: cacheDirectoryInternal, withIntermediateDirectories: true)
     }
 
     func loadImage(from url: URL) async -> UIImage? {
-        let fileURL = cacheDirectoryInternal.appendingPathComponent(url.lastPathComponent)
+        // ✅ Use hash of full URL for unique file name
+        let fileName = "\(url.absoluteString.hashValue).jpg"
+        let fileURL = cacheDirectoryInternal.appendingPathComponent(fileName)
 
         if fileManager.fileExists(atPath: fileURL.path),
            let data = try? Data(contentsOf: fileURL),
@@ -36,6 +41,7 @@ class ImageCacheManager {
         }
     }
 
+    // Exposed for testing
     #if DEBUG
     var test_cacheDirectory: URL {
         return cacheDirectoryInternal
